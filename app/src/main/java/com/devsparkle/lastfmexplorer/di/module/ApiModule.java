@@ -1,5 +1,6 @@
 package com.devsparkle.lastfmexplorer.di.module;
 
+import com.devsparkle.lastfmexplorer.BuildConfig;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 
@@ -24,12 +25,12 @@ public class ApiModule {
     @Named("okHttpClient")
     public OkHttpClient.Builder provideOkHttpBuilder() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//        if (BuildConfig.DEBUG) {
-//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//            logging.level(HttpLoggingInterceptor.Level.BODY);
-//            builder.addInterceptor(logging);
-//            builder.addNetworkInterceptor(new StethoInterceptor());
-//        }
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.level(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(logging);
+            builder.addNetworkInterceptor(new StethoInterceptor());
+        }
         return builder.readTimeout(1, TimeUnit.MINUTES)
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .writeTimeout(1, TimeUnit.MINUTES)
