@@ -4,4 +4,5 @@
     <string name="search_title">Search Artists, Albums, Tracks...</string>
     <string name="search_hint">Search Artists, Albums, Tracks...</string>
     <string name="error_not_connected">You are not connected</string>
+    <string name="error_occurred">One error occurred</string>
 </resources>

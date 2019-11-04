@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -15,8 +16,12 @@ import com.devsparkle.lastfmexplorer.R;
 import com.devsparkle.lastfmexplorer.domain.model.AlbumDTO;
 import com.devsparkle.lastfmexplorer.domain.model.ArtistDTO;
 import com.devsparkle.lastfmexplorer.domain.model.TrackDTO;
+import com.devsparkle.lastfmexplorer.ui.cell.AlbumCell;
 import com.devsparkle.lastfmexplorer.ui.screen.base.BaseActivity;
+import com.jaychang.srv.SimpleCell;
+import com.jaychang.srv.SimpleRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -24,6 +29,8 @@ import javax.inject.Inject;
 
 public class SearchActivity extends BaseActivity<SearchContract.View, SearchContract.Presenter> implements SearchContract.View {
     private final String TAG = SearchActivity.class.toString();
+
+    SimpleRecyclerView mRecyclerView;
 
     @Inject
     SearchPresenter mSearchPresenter;
@@ -40,8 +47,15 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchCont
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        loadView();
+
         handleIntent(getIntent());
 
+    }
+
+    private void loadView(){
+        mRecyclerView = findViewById(R.id.recyclerView);
     }
 
     @Override
@@ -71,7 +85,7 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchCont
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-
+            presenter.searchAlbum(query);
 
         }
     }
@@ -84,7 +98,21 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchCont
 
     @Override
     public void showAlbum(List<AlbumDTO> albums) {
+        List<AlbumCell> cells = new ArrayList();
 
+        for (AlbumDTO album : albums) {
+            AlbumCell cell = new AlbumCell(album);
+
+            cell.setOnCellClickListener(new SimpleCell.OnCellClickListener<AlbumDTO>() {
+                @Override
+                public void onCellClicked(@NonNull AlbumDTO item) {
+                  // start activity album with mbid album
+
+                }
+            });
+            cells.add(cell);
+        }
+        mRecyclerView.addCells(cells);
     }
 
     @Override
@@ -95,5 +123,10 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchCont
     @Override
     public void showNotConnected() {
         Toast.makeText(this, getString(R.string.error_not_connected), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(this, getString(R.string.error_occurred), Toast.LENGTH_SHORT).show();
     }
 }

@@ -33,6 +33,12 @@ public interface SearchContract {
          * Show not connected
          */
         void showNotConnected();
+
+        /**
+         * Show error
+         */
+
+        void showError();
     }
 
 
@@ -55,6 +61,7 @@ public interface SearchContract {
          * @param text
          */
         void searchTrack(String text);
+
 
 
     }

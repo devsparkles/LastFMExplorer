@@ -24,7 +24,8 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", '"http://ws.audioscrobbler.com/"'
+            buildConfigField "String", "BASE_URL", '"https://ws.audioscrobbler.com/"'
+            buildConfigField "String", "API_KEY", '"3f0abb9cc5f6995c0360eee5fa79098c"'
             applicationIdSuffix ".debug"
             versionNameSuffix '-DEBUG'
             debuggable true
@@ -33,6 +34,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_URL", '"http://ws.audioscrobbler.com/"'
+            buildConfigField "String", "API_KEY", '"3f0abb9cc5f6995c0360eee5fa79098c"'
             signingConfig signingConfigs.release
         }
     }

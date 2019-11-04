@@ -21,6 +21,5 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_search" />
-    ß
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,7 @@
 package com.devsparkle.lastfmexplorer.di.module;
 
 import com.devsparkle.lastfmexplorer.BuildConfig;
+import com.devsparkle.lastfmexplorer.data.remote.api.LastFMService;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 
@@ -45,8 +46,16 @@ public class ApiModule {
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("http://localhost.com") // will be override with @Url at runtime
+                .baseUrl(BuildConfig.BASE_URL) // will be override with @Url at runtime
                 .build();
+    }
+
+
+
+    @Provides
+    @Singleton
+    public LastFMService provideLastFMService(Retrofit retrofit) {
+        return retrofit.create(LastFMService.class);
     }
 
 

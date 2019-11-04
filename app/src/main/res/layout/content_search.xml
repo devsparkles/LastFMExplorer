@@ -8,4 +8,16 @@
     tools:context="com.devsparkle.lastfmexplorer.ui.screen.search.SearchActivity"
     tools:showIn="@layout/activity_search">
 
+
+    <com.jaychang.srv.SimpleRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:padding="8dp"
+        app:srv_layoutMode="linearVertical"
+        app:srv_showDivider="false"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
