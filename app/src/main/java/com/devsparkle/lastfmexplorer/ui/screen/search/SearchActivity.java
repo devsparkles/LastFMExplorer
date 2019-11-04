@@ -112,6 +112,7 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchCont
             });
             cells.add(cell);
         }
+        mRecyclerView.removeAllCells();
         mRecyclerView.addCells(cells);
     }
 

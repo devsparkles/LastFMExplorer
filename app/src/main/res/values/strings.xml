@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">LastFMExplorer</string>
     <string name="title_activity_search">Last FM</string>
+    <string name="title_activity_show_album">Show Album</string>
     <string name="search_title">Search Artists, Albums, Tracks...</string>
     <string name="search_hint">Search Artists, Albums, Tracks...</string>
     <string name="error_not_connected">You are not connected</string>
