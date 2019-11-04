@@ -17,7 +17,9 @@ import com.devsparkle.lastfmexplorer.domain.model.AlbumDTO;
 import com.devsparkle.lastfmexplorer.domain.model.ArtistDTO;
 import com.devsparkle.lastfmexplorer.domain.model.TrackDTO;
 import com.devsparkle.lastfmexplorer.ui.cell.AlbumCell;
+import com.devsparkle.lastfmexplorer.ui.screen.album.ShowAlbumActivity;
 import com.devsparkle.lastfmexplorer.ui.screen.base.BaseActivity;
+import com.devsparkle.lastfmexplorer.utils.AppConstants;
 import com.jaychang.srv.SimpleCell;
 import com.jaychang.srv.SimpleRecyclerView;
 
@@ -54,7 +56,7 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchCont
 
     }
 
-    private void loadView(){
+    private void loadView() {
         mRecyclerView = findViewById(R.id.recyclerView);
     }
 
@@ -106,8 +108,10 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchCont
             cell.setOnCellClickListener(new SimpleCell.OnCellClickListener<AlbumDTO>() {
                 @Override
                 public void onCellClicked(@NonNull AlbumDTO item) {
-                  // start activity album with mbid album
-
+                    // start show album detail with the mbid (id) of the album
+                    Intent intent = new Intent(SearchActivity.this, ShowAlbumActivity.class);
+                    intent.putExtra(AppConstants.EXTRA_ALBUM_ID, item.getMbid());
+                    startActivity(intent);
                 }
             });
             cells.add(cell);

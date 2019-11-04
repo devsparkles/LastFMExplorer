@@ -10,6 +10,7 @@ import com.devsparkle.lastfmexplorer.R;
 import com.devsparkle.lastfmexplorer.domain.model.AlbumDetailDTO;
 import com.devsparkle.lastfmexplorer.ui.screen.base.BaseActivity;
 import com.devsparkle.lastfmexplorer.ui.screen.search.SearchActivity;
+import com.devsparkle.lastfmexplorer.utils.AppConstants;
 
 import javax.inject.Inject;
 
@@ -32,14 +33,26 @@ public class ShowAlbumActivity extends BaseActivity<ShowAlbumContract.View, Show
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        // set the view elements
         loadView();
+        // load the album details
+        String mbid = getIntent().getStringExtra(AppConstants.EXTRA_ALBUM_ID);
+        if (mbid != null) {
+            presenter.getAlbumDetailByMbid(mbid);
+        }
+
+
     }
 
-    private void loadView(){
+    private void loadView() {
 
     }
 
+    /**
+     * Display the album detail
+     *
+     * @param albumDetail
+     */
     @Override
     public void showAlbum(AlbumDetailDTO albumDetail) {
 
@@ -50,6 +63,9 @@ public class ShowAlbumActivity extends BaseActivity<ShowAlbumContract.View, Show
 
     }
 
+    /**
+     * Show error if we can't get the informations
+     */
     @Override
     public void showError() {
 
